@@ -11,6 +11,11 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         margin: 10,
+    },
+    instructions: {
+        fontSize: 16,
+        textAlign: 'center',
+        margin: 10,
     }
 });
 
