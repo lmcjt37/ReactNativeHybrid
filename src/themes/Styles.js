@@ -7,13 +7,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
     },
-    welcome: {
+    title: {
         fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    instructions: {
-        fontSize: 16,
         textAlign: 'center',
         margin: 10,
     }
