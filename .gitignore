@@ -51,3 +51,9 @@ buck-out/
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
+
+# LT - Additional
+# Removes private credentials which should be obtained from client
+
+ios/Constants.h
+ios/Constants.m

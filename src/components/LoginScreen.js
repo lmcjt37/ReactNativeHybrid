@@ -3,20 +3,31 @@ import {
   Button,
   Text,
   View,
+  NativeModules
 } from 'react-native';
 
 import Styles from '../themes/Styles';
 
 const LoginScreen = ({ navigation }) => (
     <View style={ Styles.container }>
-        <Text style={ Styles.welcome }>
-            Screen A
-        </Text>
-        <Text style={ Styles.instructions }>
-            This is great
+        <Text style={ Styles.title }>
+            Login screen
         </Text>
         <Button
-            onPress={() => navigation.dispatch({ type: 'Login' })}
+            onPress={() => {
+                NativeModules.CustomAppAuth.authorise((response) => {
+                    console.log(response);
+                });
+            }}
+            title="Authorise"
+            />
+        <Button
+            onPress={() => {
+                NativeModules.CustomAppAuth.signin((response) => {
+                    console.log(response);
+                    navigation.dispatch({ type: 'Login' });
+                });
+            }}
             title="Log in"
             />
     </View>
