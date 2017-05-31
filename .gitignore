@@ -51,3 +51,16 @@ buck-out/
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
+
+# Additional
+#
+# Removes private credentials which should be obtained from client
+
+ios/**/Constants.h
+ios/**/Constants.m
+
+#
+# Pods
+
+ios/Pods
+ios/.Podfile.lock
