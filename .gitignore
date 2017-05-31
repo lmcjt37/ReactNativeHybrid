@@ -63,4 +63,4 @@ ios/**/Constants.m
 # Pods
 
 ios/Pods
-ios/.Podfile.lock
+ios/Podfile.lock
