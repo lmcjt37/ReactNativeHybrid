@@ -61,19 +61,13 @@
   // Sends the URL to the current authorization flow (if any) which will process it if it relates to
   // an authorization response.
   
-  NSLog(@"HERE ----- 1");
-  NSLog(@"OPTIONS ----- %@", options);
-  NSLog(@"URL ----- %@", url);
-  NSLog(@"AUTH FLOW ----- %d", [_currentAuthorizationFlow resumeAuthorizationFlowWithURL:url]);
-  
   if ([_currentAuthorizationFlow resumeAuthorizationFlowWithURL:url]) {
     _currentAuthorizationFlow = nil;
     return YES;
   }
 
-  // Your additional URL handling (if any) goes here.
-  // Added to test callback on failed flow - LT
-//  [_currentAuthorizationFlow cancel];
+  // return cancel event when can't resume auth flow
+  [_currentAuthorizationFlow cancel];
 
   return NO;
 }

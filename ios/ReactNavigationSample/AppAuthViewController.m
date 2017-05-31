@@ -12,7 +12,7 @@
 #import "AppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
 #import "Constants.h"
-//#import "Events.h"
+#import "Events.h"
 
 typedef void (^PostRegistrationCallback)(OIDServiceConfiguration *configuration,
                                          OIDRegistrationResponse *registrationResponse);
@@ -47,7 +47,6 @@ typedef void (^PostRegistrationCallback)(OIDServiceConfiguration *configuration,
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.view];
     
     [self loadState];
-//    [self updateUI];
 }
 
 RCT_EXPORT_MODULE();
@@ -120,15 +119,8 @@ RCT_EXPORT_METHOD(authorise:(nullable id)authorise) {
   [self stateChanged];
 }
 
-/*! @brief Refreshes UI, typically called after the auth state changed.
- */
-- (void)updateUI {
-    // UI layout changes go here - may happen on JS side
-}
-
 - (void)stateChanged {
   [self saveState];
-//  [self updateUI];
 }
 
 - (void)didChangeState:(OIDAuthState *)state {
@@ -188,7 +180,6 @@ RCT_EXPORT_METHOD(authorise:(nullable id)authorise) {
   AppDelegate *appDelegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
   [self logMessage:@"Initiating authorization request with scope: %@", request.scope];
 
-    // Presenting View Controller changed to root controller
   appDelegate.currentAuthorizationFlow =
       [OIDAuthState authStateByPresentingAuthorizationRequest:request
           presentingViewController:[[appDelegate window] rootViewController]
@@ -322,9 +313,10 @@ RCT_EXPORT_METHOD(authorise:(nullable id)authorise) {
         [self logMessage:@"Success: %@", jsonDictionaryOrArray];
 
         // send success object to JS
-//        Events *events = [[Events alloc] init];
-//        [events logEvent:jsonDictionaryOrArray];
-          
+        Events *events = [[Events alloc] init];
+        
+        [events logEvent:jsonDictionaryOrArray];
+        
       });
     }];
 
@@ -349,12 +341,13 @@ RCT_EXPORT_METHOD(authorise:(nullable id)authorise) {
   // appends to output log
   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
   dateFormatter.dateFormat = @"hh:mm:ss";
-//  NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
-//    
-//  Events *events = [[Events alloc] init];
-//    
-//  [events logEvent:[NSString stringWithFormat:@"%@: %@", dateString, log]];
+  NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+  
+  // send log events to JS
+  Events *events = [[Events alloc] init];
     
+  [events logEvent:[NSString stringWithFormat:@"%@: %@", dateString, log]];
+  
 }
 
 @end

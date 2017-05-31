@@ -10,8 +10,28 @@
 #import "AppDelegate.h"
 
 @implementation Events
+{
+  bool hasListeners;
+}
 
 RCT_EXPORT_MODULE();
+
+@synthesize bridge;
+
+- (void)startObserving {
+    hasListeners = YES;
+}
+
+- (void)stopObserving {
+    hasListeners = NO;
+}
+
+- (void)setBridge
+{
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+  
+    self.bridge = delegate.bridge;
+}
 
 - (NSArray<NSString *> *)supportedEvents
 {
@@ -20,12 +40,18 @@ RCT_EXPORT_MODULE();
 
 - (void)logEvent:(NSString *)event
 {
+  if (hasListeners) {
+    [self setBridge];
     [self sendEventWithName:@"LogEvent" body:@{@"log": event}];
+  }
 }
 
 - (void)logSuccess:(NSDictionary *)response
 {
+  if (hasListeners) {
+    [self setBridge];
     [self sendEventWithName:@"LogSuccess" body:@{@"response": response}];
+  }
 }
 
 @end
