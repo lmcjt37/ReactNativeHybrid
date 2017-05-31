@@ -12,7 +12,7 @@
 #import "AppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
 #import "Constants.h"
-#import "Events.h"
+//#import "Events.h"
 
 typedef void (^PostRegistrationCallback)(OIDServiceConfiguration *configuration,
                                          OIDRegistrationResponse *registrationResponse);
@@ -322,8 +322,8 @@ RCT_EXPORT_METHOD(authorise:(nullable id)authorise) {
         [self logMessage:@"Success: %@", jsonDictionaryOrArray];
 
         // send success object to JS
-        Events *events = [[Events alloc] init];
-        [events logEvent:jsonDictionaryOrArray];
+//        Events *events = [[Events alloc] init];
+//        [events logEvent:jsonDictionaryOrArray];
           
       });
     }];
