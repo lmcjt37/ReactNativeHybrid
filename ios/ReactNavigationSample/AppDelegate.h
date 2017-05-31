@@ -16,6 +16,7 @@
         limitations under the License.
  */
 #import <UIKit/UIKit.h>
+#import <React/RCTBridge.h>
 
 @protocol OIDAuthorizationFlowSession;
 
@@ -33,5 +34,10 @@
         nil, except when an authorization flow is in progress.
  */
 @property(nonatomic, strong, nullable) id<OIDAuthorizationFlowSession> currentAuthorizationFlow;
+
+/**
+ * Expose the bridge globally, can now be accessed from AppDelegate
+ */
+@property(nonatomic, strong, nullable) RCTBridge *bridge;
 
 @end

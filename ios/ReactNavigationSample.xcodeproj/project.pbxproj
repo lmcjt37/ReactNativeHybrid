@@ -37,9 +37,10 @@
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		913942B30A32BAA6BFE54D91 /* libPods-ReactNavigationSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0C83DEA421B6E7A4237FF2 /* libPods-ReactNavigationSample.a */; };
-		E00FDD791ED5C8F900F6CA73 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = E00FDD781ED5C8F900F6CA73 /* Constants.m */; };
+		E01282921EDD91F600CE1F75 /* AppAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E012828F1EDD91F600CE1F75 /* AppAuthViewController.m */; };
+		E01282931EDD91F600CE1F75 /* Events.m in Sources */ = {isa = PBXBuildFile; fileRef = E01282911EDD91F600CE1F75 /* Events.m */; };
 		E029491B1EBB43FC0066411F /* Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = E029491A1EBB43FC0066411F /* Alert.m */; };
-		E0AAFEB41ECB8E2500C84F74 /* AppAuthExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0AAFEB31ECB8E2500C84F74 /* AppAuthExampleViewController.m */; };
+		E06961BF1EDDA266000EA39F /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = E06961BE1EDDA266000EA39F /* Constants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -262,12 +263,14 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		E00FCC0A1ECDCBE60051BF26 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
-		E00FDD771ED5C8F900F6CA73 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		E00FDD781ED5C8F900F6CA73 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		E012828E1EDD91F600CE1F75 /* AppAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppAuthViewController.h; path = ReactNavigationSample/AppAuthViewController.h; sourceTree = "<group>"; };
+		E012828F1EDD91F600CE1F75 /* AppAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppAuthViewController.m; path = ReactNavigationSample/AppAuthViewController.m; sourceTree = "<group>"; };
+		E01282901EDD91F600CE1F75 /* Events.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Events.h; path = ReactNavigationSample/Events.h; sourceTree = "<group>"; };
+		E01282911EDD91F600CE1F75 /* Events.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Events.m; path = ReactNavigationSample/Events.m; sourceTree = "<group>"; };
 		E02949191EBB43FC0066411F /* Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Alert.h; path = ReactNavigationSample/Alert.h; sourceTree = "<group>"; };
 		E029491A1EBB43FC0066411F /* Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Alert.m; path = ReactNavigationSample/Alert.m; sourceTree = "<group>"; };
-		E0AAFEB21ECB8E2500C84F74 /* AppAuthExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppAuthExampleViewController.h; sourceTree = "<group>"; };
-		E0AAFEB31ECB8E2500C84F74 /* AppAuthExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppAuthExampleViewController.m; sourceTree = "<group>"; };
+		E06961BD1EDDA266000EA39F /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ReactNavigationSample/Constants.h; sourceTree = "<group>"; };
+		E06961BE1EDDA266000EA39F /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = ReactNavigationSample/Constants.m; sourceTree = "<group>"; };
 		F6D0875E08137392ED1EA8C2 /* Pods-ReactNavigationSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNavigationSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactNavigationSample/Pods-ReactNavigationSample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -404,19 +407,21 @@
 		13B07FAE1A68108700A75B9A /* ReactNavigationSample */ = {
 			isa = PBXGroup;
 			children = (
-				E0AAFEB21ECB8E2500C84F74 /* AppAuthExampleViewController.h */,
-				E0AAFEB31ECB8E2500C84F74 /* AppAuthExampleViewController.m */,
+				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				E012828E1EDD91F600CE1F75 /* AppAuthViewController.h */,
+				E012828F1EDD91F600CE1F75 /* AppAuthViewController.m */,
+				E01282901EDD91F600CE1F75 /* Events.h */,
+				E01282911EDD91F600CE1F75 /* Events.m */,
+				E06961BD1EDDA266000EA39F /* Constants.h */,
+				E06961BE1EDDA266000EA39F /* Constants.m */,
 				E02949191EBB43FC0066411F /* Alert.h */,
 				E029491A1EBB43FC0066411F /* Alert.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
-				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
-				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				E00FDD771ED5C8F900F6CA73 /* Constants.h */,
-				E00FDD781ED5C8F900F6CA73 /* Constants.m */,
 			);
 			name = ReactNavigationSample;
 			sourceTree = "<group>";
@@ -1001,11 +1006,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E00FDD791ED5C8F900F6CA73 /* Constants.m in Sources */,
+				E01282931EDD91F600CE1F75 /* Events.m in Sources */,
 				E029491B1EBB43FC0066411F /* Alert.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				E0AAFEB41ECB8E2500C84F74 /* AppAuthExampleViewController.m in Sources */,
+				E01282921EDD91F600CE1F75 /* AppAuthViewController.m in Sources */,
+				E06961BF1EDDA266000EA39F /* Constants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 
 import Styles from '../themes/Styles';
+const { AppAuthViewController, Alert } = NativeModules;
 
 const LoginScreen = ({ navigation }) => (
     <View style={ Styles.container }>
@@ -15,20 +16,16 @@ const LoginScreen = ({ navigation }) => (
         </Text>
         <Button
             onPress={() => {
-                NativeModules.CustomAppAuth.authorise((response) => {
-                    console.log(response);
+                AppAuthViewController.authorise((response) => {
+                    if (response) {
+                        navigation.dispatch({ type: 'Login' });
+                        Alert.getAlert(JSON.stringify(response, null, 4));
+                    } else {
+                        Alert.getAlert("There was a problem logging in.");
+                    }
                 });
             }}
-            title="Authorise"
-            />
-        <Button
-            onPress={() => {
-                NativeModules.CustomAppAuth.signin((response) => {
-                    console.log(response);
-                    navigation.dispatch({ type: 'Login' });
-                });
-            }}
-            title="Log in"
+            title="Log In"
             />
     </View>
 );
