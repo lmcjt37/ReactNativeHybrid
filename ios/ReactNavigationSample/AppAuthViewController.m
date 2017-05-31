@@ -1,86 +1,59 @@
-/*! @file AppAuthExampleViewController.m
-    @brief AppAuth iOS SDK Example
-    @copyright
-        Copyright 2015 Google Inc. All Rights Reserved.
-    @copydetails
-        Licensed under the Apache License, Version 2.0 (the "License");
-        you may not use this file except in compliance with the License.
-        You may obtain a copy of the License at
+//
+//  AppAuthViewController.m
+//  ReactNavigationSample
+//
+//  Created by Luke Taylor on 5/12/17.
+//  Copyright © 2017 Luke Taylor. All rights reserved.
+//
 
-        http://www.apache.org/licenses/LICENSE-2.0
-
-        Unless required by applicable law or agreed to in writing, software
-        distributed under the License is distributed on an "AS IS" BASIS,
-        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-        See the License for the specific language governing permissions and
-        limitations under the License.
- */
-
-#import "AppAuthExampleViewController.h"
-
-#import <QuartzCore/QuartzCore.h>
-
+#import "AppAuthViewController.h"
 #import "AppAuth.h"
+#import "RCTRootView.h"
 #import "AppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
 #import "Constants.h"
+#import "Events.h"
 
 typedef void (^PostRegistrationCallback)(OIDServiceConfiguration *configuration,
                                          OIDRegistrationResponse *registrationResponse);
 
-/*! @brief Replaced with a constants file - LT
- */
+@interface AppAuthViewController () <OIDAuthStateChangeDelegate, OIDAuthStateErrorDelegate, RCTBridgeModule>
 
-/*! @brief The OIDC issuer from which the configuration will be discovered.
- */
-//static NSString *const kIssuer = @"<YOUR_ISSUER_HERE>";
-
-/*! @brief The OAuth client ID.
-    @discussion For client configuration instructions, see the README.
-        Set to nil to use dynamic registration with this example.
-    @see https://github.com/openid/AppAuth-iOS/blob/master/Examples/Example-iOS_ObjC/README.md
- */
-//static NSString *const kClientID = @"<YOUR_CLIENT_ID_HERE>";
-
-/*! @brief The OAuth redirect URI for the client @c kClientID.
-    @discussion For client configuration instructions, see the README.
-    @see https://github.com/openid/AppAuth-iOS/blob/master/Examples/Example-iOS_ObjC/README.md
- */
-//static NSString *const kRedirectURI = @"<YOUR_REDIRECT_URL_HERE>";
-
-/*! @brief NSCoding key for the authState property.
- */
-//static NSString *const kAppAuthExampleAuthStateKey = @"AuthState";
-
-@interface AppAuthExampleViewController () <OIDAuthStateChangeDelegate, OIDAuthStateErrorDelegate>
 @end
 
-@implementation AppAuthExampleViewController
-
-RCT_EXPORT_MODULE(CustomAppAuth);
-
-RCT_EXPORT_METHOD(authorise:(RCTResponseSenderBlock)callback) {
-
-  [self authWithAutoCodeExchange];
-  
-  callback(@[[NSNull null], @"authorise was fired..."]);
-
-}
-
-RCT_EXPORT_METHOD(signin:(RCTResponseSenderBlock)callback) {
-
-  NSLog(@"signin was fired...");
-
-  [self userinfo];
-  
-  callback(@[[NSNull null], @""]);
-
-}
+@implementation AppAuthViewController
 
 - (void)viewDidLoad {
-  [super viewDidLoad];
+    [super viewDidLoad];
+    
+    /**
+     * We need a reference to the AppDelegate since that is where we stored our `RCTBridge`
+     */
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    /**
+     * We create a `RCTRootView` that initializes with the `RCTBridge` that we already pre-loaded
+     */
+    RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:delegate.bridge
+                                                     moduleName:@"ReactNavigationSample"
+                                              initialProperties:nil];
+    rootView.frame = [[UIScreen mainScreen] bounds];
+    
+    /**
+     * Every `ViewController` has an initial view - here we set our `RCTRootView` as this initial view
+     */
+    [self.view addSubview:rootView];
+  
+    [[[UIApplication sharedApplication] keyWindow] addSubview:self.view];
+    
+    [self loadState];
+//    [self updateUI];
+}
 
-  [self loadState];
-  [self updateUI];
+RCT_EXPORT_MODULE();
+
+RCT_EXPORT_METHOD(authorise:(nullable id)authorise) {
+    [self authWithAutoCodeExchange];
 }
 
 - (void)verifyConfig {
@@ -150,16 +123,12 @@ RCT_EXPORT_METHOD(signin:(RCTResponseSenderBlock)callback) {
 /*! @brief Refreshes UI, typically called after the auth state changed.
  */
 - (void)updateUI {
-
-  /*! LT - updates to UI should be handled by React-Native
-   */
-  NSLog(@"Update UI called");
-
+    // UI layout changes go here - may happen on JS side
 }
 
 - (void)stateChanged {
   [self saveState];
-  [self updateUI];
+//  [self updateUI];
 }
 
 - (void)didChangeState:(OIDAuthState *)state {
@@ -177,7 +146,7 @@ RCT_EXPORT_METHOD(signin:(RCTResponseSenderBlock)callback) {
 - (void)doClientRegistration:(OIDServiceConfiguration *)configuration
                     callback:(PostRegistrationCallback)callback {
     NSURL *redirectURI = [NSURL URLWithString:K_REDIRECT_URI];
-  
+
     OIDRegistrationRequest *request =
         [[OIDRegistrationRequest alloc] initWithConfiguration:configuration
                                                  redirectURIs:@[ redirectURI ]
@@ -206,7 +175,6 @@ RCT_EXPORT_METHOD(signin:(RCTResponseSenderBlock)callback) {
                           clientID:(NSString *)clientID
                       clientSecret:(NSString *)clientSecret {
   NSURL *redirectURI = [NSURL URLWithString:K_REDIRECT_URI];
-  
   // builds authentication request
   OIDAuthorizationRequest *request =
       [[OIDAuthorizationRequest alloc] initWithConfiguration:configuration
@@ -219,24 +187,24 @@ RCT_EXPORT_METHOD(signin:(RCTResponseSenderBlock)callback) {
   // performs authentication request
   AppDelegate *appDelegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
   [self logMessage:@"Initiating authorization request with scope: %@", request.scope];
-  
-  // LT - set presentingViewController to be rootController(React rootView)
+
+    // Presenting View Controller changed to root controller
   appDelegate.currentAuthorizationFlow =
       [OIDAuthState authStateByPresentingAuthorizationRequest:request
-                                     presentingViewController:[[[[UIApplication sharedApplication] delegate] window] rootViewController]
-                                                     callback:^(OIDAuthState *_Nullable authState, NSError *_Nullable error) {
-                                                       NSLog(@"---->> %@", authState);
+          presentingViewController:[[appDelegate window] rootViewController]
+                          callback:^(OIDAuthState *_Nullable authState, NSError *_Nullable error) {
             if (authState) {
               [self setAuthState:authState];
               [self logMessage:@"Got authorization tokens. Access token: %@",
                                authState.lastTokenResponse.accessToken];
+              [self userinfo];
             } else {
               [self logMessage:@"Authorization error: %@", [error localizedDescription]];
               [self setAuthState:nil];
             }
           }];
 }
-
+                   
 - (void)authWithAutoCodeExchange {
   [self verifyConfig];
 
@@ -352,10 +320,16 @@ RCT_EXPORT_METHOD(signin:(RCTResponseSenderBlock)callback) {
 
         // success response
         [self logMessage:@"Success: %@", jsonDictionaryOrArray];
+
+        // send success object to JS
+        Events *events = [[Events alloc] init];
+        [events logEvent:jsonDictionaryOrArray];
+          
       });
     }];
 
     [postDataTask resume];
+      
   }];
 }
 
@@ -375,16 +349,12 @@ RCT_EXPORT_METHOD(signin:(RCTResponseSenderBlock)callback) {
   // appends to output log
   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
   dateFormatter.dateFormat = @"hh:mm:ss";
-  
-  /* LT - May be used at some point in the future
-   */
-  
 //  NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
-//  _logTextView.text = [NSString stringWithFormat:@"%@%@%@: %@",
-//                                                 _logTextView.text,
-//                                                 ([_logTextView.text length] > 0) ? @"\n" : @"",
-//                                                 dateString,
-//                                                 log];
+//    
+//  Events *events = [[Events alloc] init];
+//    
+//  [events logEvent:[NSString stringWithFormat:@"%@: %@", dateString, log]];
+    
 }
 
 @end

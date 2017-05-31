@@ -24,43 +24,30 @@
  */
 
 #import "AppDelegate.h"
-
 #import "AppAuth.h"
-#import "AppAuthExampleViewController.h"
-
-#import <React/RCTBundleURLProvider.h>
-#import <React/RCTRootView.h>
-
-@interface AppDelegate ()
-
-@end
+#import "AppAuthViewController.h"
 
 @implementation AppDelegate
 
+@synthesize bridge;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  NSURL *jsCodeLocation;
-
-  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
-
-  RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-                                                      moduleName:@"ReactNavigationSample"
-                                               initialProperties:nil
-                                                   launchOptions:launchOptions];
   
-  rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
-
-  UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+  NSURL *jsCodeLocation = [NSURL
+                           URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
   
-  UIViewController *rootViewController = [[AppAuthExampleViewController alloc] initWithNibName:nil bundle:nil];
-
-  rootViewController.view = rootView;
+  bridge = [[RCTBridge alloc] initWithBundleURL:jsCodeLocation
+                                 moduleProvider:nil
+                                  launchOptions:launchOptions];
   
-  window.rootViewController = rootViewController;
+  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   
-  _window = window;
+  UIViewController *mainViewController = [[AppAuthViewController alloc] init];
   
-  [window makeKeyAndVisible];
+  self.window.rootViewController = mainViewController;
+  
+  [_window makeKeyAndVisible];
   
   return YES;
 }
@@ -73,18 +60,20 @@
             options:(NSDictionary<NSString *, id> *)options {
   // Sends the URL to the current authorization flow (if any) which will process it if it relates to
   // an authorization response.
-  NSLog(@"--- flow 1 ---");
-  NSLog(@"--- url --- %@", url);
-  NSLog(@"--- if --- %d", [_currentAuthorizationFlow resumeAuthorizationFlowWithURL:url]);
+  
+  NSLog(@"HERE ----- 1");
+  NSLog(@"OPTIONS ----- %@", options);
+  NSLog(@"URL ----- %@", url);
+  NSLog(@"AUTH FLOW ----- %d", [_currentAuthorizationFlow resumeAuthorizationFlowWithURL:url]);
   
   if ([_currentAuthorizationFlow resumeAuthorizationFlowWithURL:url]) {
-    NSLog(@"--- inside ---");
     _currentAuthorizationFlow = nil;
     return YES;
   }
-  NSLog(@"--- flow 2 ---");
 
   // Your additional URL handling (if any) goes here.
+  // Added to test callback on failed flow - LT
+//  [_currentAuthorizationFlow cancel];
 
   return NO;
 }
@@ -98,12 +87,9 @@
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
-  NSLog(@"--- flow 2 ---");
   return [self application:application
                    openURL:url
                    options:@{}];
 }
-
-
 
 @end
