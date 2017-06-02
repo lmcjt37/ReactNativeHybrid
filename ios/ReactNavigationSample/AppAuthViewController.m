@@ -228,6 +228,10 @@ RCT_EXPORT_METHOD(authorise:(nullable id)authorise) {
    }];
 }
 
+RCT_EXPORT_METHOD(isAuthorised:(RCTResponseSenderBlock)callback) {
+  callback(@[[NSNull null], @(_authState.isAuthorized)]);
+}
+
 - (void)userinfo {
   NSURL *userinfoEndpoint =
       _authState.lastAuthorizationResponse.request.configuration.discoveryDocument.userinfoEndpoint;
@@ -310,7 +314,6 @@ RCT_EXPORT_METHOD(authorise:(nullable id)authorise) {
         }
 
         // success response
-//        [self logMessage:@"Success: %@", jsonDictionaryOrArray];
         [Events logEventWithName:@"LogSuccess" withPayload:@{@"success": jsonDictionaryOrArray}];
         
       });
@@ -321,9 +324,6 @@ RCT_EXPORT_METHOD(authorise:(nullable id)authorise) {
   }];
 }
 
-/*! @brief Logs a message to stdout and the textfield.
-    @param format The format string and arguments.
- */
 - (void)logMessage:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2) {
   // gets message as string
   va_list argp;
@@ -333,11 +333,6 @@ RCT_EXPORT_METHOD(authorise:(nullable id)authorise) {
 
   // outputs to stdout
   NSLog(@"%@", log);
-
-  // appends to output log
-//  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//  dateFormatter.dateFormat = @"hh:mm:ss";
-//  NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
   
   // send log events to JS
   [Events logEventWithName:@"LogEvent" withPayload:@{@"event": log}];

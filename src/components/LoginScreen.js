@@ -51,6 +51,17 @@ class LoginScreen extends Component {
                     }}
                     title="Log In"
                     />
+                <Button
+                    onPress={() => {
+                        AppAuthViewController.isAuthorised((error, response) => {
+                            if (error) {
+                                Alert.getAlert(error);
+                            }
+                            Alert.getAlert("Is the app authorised? " + response);
+                        });
+                    }}
+                    title="Is Authorised?"
+                    />
             </View>
         );
     }

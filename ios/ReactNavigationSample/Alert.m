@@ -6,7 +6,6 @@
 //  Copyright © 2017 Facebook. All rights reserved.
 //
 
-#import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
 #import "Alert.h"
 
