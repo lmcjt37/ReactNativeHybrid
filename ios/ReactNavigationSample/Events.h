@@ -11,8 +11,6 @@
 
 @interface Events : RCTEventEmitter <RCTBridgeModule>
 
-- (void)logEvent:(NSString *)event;
-
-- (void)logSuccess:(NSDictionary *)response;
++ (void)logEventWithName:(NSString *)event withPayload:(NSDictionary *)payload;
 
 @end

@@ -310,12 +310,8 @@ RCT_EXPORT_METHOD(authorise:(nullable id)authorise) {
         }
 
         // success response
-        [self logMessage:@"Success: %@", jsonDictionaryOrArray];
-
-        // send success object to JS
-        Events *events = [[Events alloc] init];
-        
-        [events logEvent:jsonDictionaryOrArray];
+//        [self logMessage:@"Success: %@", jsonDictionaryOrArray];
+        [Events logEventWithName:@"LogSuccess" withPayload:@{@"success": jsonDictionaryOrArray}];
         
       });
     }];
@@ -339,14 +335,12 @@ RCT_EXPORT_METHOD(authorise:(nullable id)authorise) {
   NSLog(@"%@", log);
 
   // appends to output log
-  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-  dateFormatter.dateFormat = @"hh:mm:ss";
-  NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+//  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//  dateFormatter.dateFormat = @"hh:mm:ss";
+//  NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
   
   // send log events to JS
-  Events *events = [[Events alloc] init];
-    
-  [events logEvent:[NSString stringWithFormat:@"%@: %@", dateString, log]];
+  [Events logEventWithName:@"LogEvent" withPayload:@{@"event": log}];
   
 }
 

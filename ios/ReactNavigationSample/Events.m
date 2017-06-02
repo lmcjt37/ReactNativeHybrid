@@ -7,51 +7,43 @@
 //
 
 #import "Events.h"
-#import "AppDelegate.h"
 
 @implementation Events
-{
-  bool hasListeners;
-}
 
 RCT_EXPORT_MODULE();
 
-@synthesize bridge;
+- (NSArray<NSString *> *)supportedEvents
+{
+  return @[@"LogEvent", @"LogSuccess"];
+}
 
 - (void)startObserving {
-    hasListeners = YES;
+  for (NSString *event in [self supportedEvents]) {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(logEventInternal:)
+                                                 name:event
+                                               object:nil];
+  }
 }
 
 - (void)stopObserving {
-    hasListeners = NO;
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)setBridge
+// Emits event to Javascript
+- (void)logEventInternal:(NSNotification *)notification
 {
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-  
-    self.bridge = delegate.bridge;
+  [self sendEventWithName:notification.name
+                     body:notification.userInfo];
 }
 
-- (NSArray<NSString *> *)supportedEvents
+// Consumes our events
++ (void)logEventWithName:(NSString *)name withPayload:(NSDictionary *)payload
 {
-    return @[@"LogEvent",@"LogSuccess"];
+  [[NSNotificationCenter defaultCenter] postNotificationName:name
+                                                      object:self
+                                                    userInfo:payload];
 }
 
-- (void)logEvent:(NSString *)event
-{
-  if (hasListeners) {
-    [self setBridge];
-    [self sendEventWithName:@"LogEvent" body:@{@"log": event}];
-  }
-}
-
-- (void)logSuccess:(NSDictionary *)response
-{
-  if (hasListeners) {
-    [self setBridge];
-    [self sendEventWithName:@"LogSuccess" body:@{@"response": response}];
-  }
-}
 
 @end
