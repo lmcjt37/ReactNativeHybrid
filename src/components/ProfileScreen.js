@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes, Component } from 'react';
 import {
   Text,
   View,
@@ -7,16 +7,28 @@ import {
 
 import Styles from '../themes/Styles';
 
-const ProfileScreen = () => (
-  <View style={ Styles.container }>
-    <Text style={ Styles.welcome }>
-      Profile Screen
-    </Text>
-  </View>
-);
+class ProfileScreen extends Component {
+    constructor(props) {
+        super(props);
+    }
 
-ProfileScreen.navigationOptions = {
-  title: 'Profile',
+    static navigationOptions = {
+        title: 'Profile',
+    };
+
+    render() {
+        return (
+            <View style={ Styles.container }>
+              <Text style={ Styles.welcome }>
+                Profile Screen
+              </Text>
+            </View>
+        );
+    }
+}
+
+ProfileScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
 };
 
 export default ProfileScreen;

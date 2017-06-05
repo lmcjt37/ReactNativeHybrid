@@ -38,8 +38,10 @@ class LoginScreen extends Component {
         this.LogSuccess = EventsManagerEmitter.addListener(
             'LogSuccess',
             (response) => {
-                if (response) {
-                    console.log(response);
+                if (response.success) {
+                    // this.setState({
+                    //     user: response.success
+                    // });
                     navigation.dispatch({ type: 'Login' });
                 } else {
                     Alert.getAlert("There was a problem logging in.");
@@ -55,21 +57,20 @@ class LoginScreen extends Component {
                 </Text>
                 <Button
                     onPress={() => {
-                        AppAuthViewController.authorise((response) => console.log(response));
-                    }}
-                    title="Log In"
-                    />
-                {/* <Button
-                    onPress={() => {
                         AppAuthViewController.isAuthorised((error, response) => {
                             if (error) {
                                 Alert.getAlert(error);
                             }
-                            Alert.getAlert("Is the app authorised? " + response);
+                            if (response) {
+                                this.LogSuccess.remove();
+                                navigation.dispatch({ type: 'Login' });
+                            } else {
+                                AppAuthViewController.authorise((response) => console.log(response));
+                            }
                         });
                     }}
-                    title="Is Authorised?"
-                    /> */}
+                    title="Log In"
+                    />
             </View>
         );
     }
