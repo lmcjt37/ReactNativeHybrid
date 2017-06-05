@@ -9,11 +9,13 @@ import {
 
 import Styles from '../themes/Styles';
 const { AppAuthViewController, Alert, Events } = NativeModules;
+const EventsManagerEmitter = new NativeEventEmitter(Events);
 
 class LoginScreen extends Component {
     constructor(props) {
         super(props);
         this.LogEvent;
+        this.LogSuccess;
     }
 
     static navigationOptions = {
@@ -21,10 +23,9 @@ class LoginScreen extends Component {
     };
 
     componentWillMount() {
-        const EventsManagerEmitter = new NativeEventEmitter(Events);
         this.LogEvent = EventsManagerEmitter.addListener(
             'LogEvent',
-            (event) => console.log("hello from JS ==> " + JSON.stringify(event))
+            (event) => console.log(JSON.stringify(event))
         );
     }
 
@@ -34,6 +35,19 @@ class LoginScreen extends Component {
 
     render() {
         const { navigation } = this.props;
+        this.LogSuccess = EventsManagerEmitter.addListener(
+            'LogSuccess',
+            (response) => {
+                if (response) {
+                    console.log(response);
+                    navigation.dispatch({ type: 'Login' });
+                } else {
+                    Alert.getAlert("There was a problem logging in.");
+                }
+                this.LogSuccess.remove();
+            }
+        );
+
         return (
             <View style={ Styles.container }>
                 <Text style={ Styles.title }>
@@ -41,17 +55,11 @@ class LoginScreen extends Component {
                 </Text>
                 <Button
                     onPress={() => {
-                        AppAuthViewController.authorise((response) => {
-                            if (response) {
-                                navigation.dispatch({ type: 'Login' });
-                            } else {
-                                Alert.getAlert("There was a problem logging in.");
-                            }
-                        });
+                        AppAuthViewController.authorise((response) => console.log(response));
                     }}
                     title="Log In"
                     />
-                <Button
+                {/* <Button
                     onPress={() => {
                         AppAuthViewController.isAuthorised((error, response) => {
                             if (error) {
@@ -61,7 +69,7 @@ class LoginScreen extends Component {
                         });
                     }}
                     title="Is Authorised?"
-                    />
+                    /> */}
             </View>
         );
     }

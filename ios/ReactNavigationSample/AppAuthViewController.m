@@ -51,8 +51,12 @@ typedef void (^PostRegistrationCallback)(OIDServiceConfiguration *configuration,
 
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(authorise:(nullable id)authorise) {
-    [self authWithAutoCodeExchange];
+RCT_EXPORT_METHOD(authorise:(RCTResponseSenderBlock)callback) {
+  [self authWithAutoCodeExchange];
+}
+
+RCT_EXPORT_METHOD(isAuthorised:(RCTResponseSenderBlock)callback) {
+  callback(@[[NSNull null], @(_authState.isAuthorized)]);
 }
 
 - (void)verifyConfig {
@@ -226,10 +230,6 @@ RCT_EXPORT_METHOD(authorise:(nullable id)authorise) {
       [self doAuthWithAutoCodeExchange:configuration clientID:K_CLIENT_ID clientSecret:nil];
     }
    }];
-}
-
-RCT_EXPORT_METHOD(isAuthorised:(RCTResponseSenderBlock)callback) {
-  callback(@[[NSNull null], @(_authState.isAuthorized)]);
 }
 
 - (void)userinfo {
