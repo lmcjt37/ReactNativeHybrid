@@ -229,7 +229,8 @@ class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAu
               }
               return
             }
-            self.logMessage(message: "Success: \(jsonDictionaryOrArray)")
+//            self.logMessage(message: "Success: \(jsonDictionaryOrArray)")
+            EventEmitterHelper.sharedInstance.dispatch(name: "LogSuccess", body: jsonDictionaryOrArray)
           }
           catch{
             self.logMessage(message: "Error while serializing data to JSON")
@@ -248,5 +249,7 @@ class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAu
   func logMessage(message:String){
     // outputs to stdout
     print(message)
+    
+    EventEmitterHelper.sharedInstance.dispatch(name: "LogEvent", body: message)
   }
 }
