@@ -37,7 +37,6 @@
 		2DCD954D1E0B4F2C00145EB5 /* ReactNavigationSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ReactNavigationSampleTests.m */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		E01282931EDD91F600CE1F75 /* Events.m in Sources */ = {isa = PBXBuildFile; fileRef = E01282911EDD91F600CE1F75 /* Events.m */; };
 		E029491B1EBB43FC0066411F /* Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = E029491A1EBB43FC0066411F /* Alert.m */; };
 		E06422CB1EE6AA1A000A9940 /* AppAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06422C91EE6AA1A000A9940 /* AppAuthViewController.swift */; };
 		E06422CC1EE6AA1A000A9940 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06422CA1EE6AA1A000A9940 /* Constants.swift */; };
@@ -45,7 +44,6 @@
 		E06422F51EE70D8F000A9940 /* EventEmitterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06422F41EE70D8F000A9940 /* EventEmitterHelper.swift */; };
 		E06422F71EE70DF4000A9940 /* EventEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06422F61EE70DF4000A9940 /* EventEmitter.swift */; };
 		E06422F91EE70EB8000A9940 /* EventEmitterBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E06422F81EE70EB8000A9940 /* EventEmitterBridge.m */; };
-		E06961BF1EDDA266000EA39F /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = E06961BE1EDDA266000EA39F /* Constants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -268,8 +266,6 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		E00FCC0A1ECDCBE60051BF26 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
-		E01282901EDD91F600CE1F75 /* Events.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Events.h; path = ReactNavigationSample/Events.h; sourceTree = "<group>"; };
-		E01282911EDD91F600CE1F75 /* Events.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Events.m; path = ReactNavigationSample/Events.m; sourceTree = "<group>"; };
 		E02949191EBB43FC0066411F /* Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Alert.h; path = ReactNavigationSample/Alert.h; sourceTree = "<group>"; };
 		E029491A1EBB43FC0066411F /* Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Alert.m; path = ReactNavigationSample/Alert.m; sourceTree = "<group>"; };
 		E06422AF1EE6AA1A000A9940 /* ReactNavigationSample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ReactNavigationSample-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -279,8 +275,6 @@
 		E06422F41EE70D8F000A9940 /* EventEmitterHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventEmitterHelper.swift; path = ReactNavigationSample/EventEmitterHelper.swift; sourceTree = "<group>"; };
 		E06422F61EE70DF4000A9940 /* EventEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventEmitter.swift; path = ReactNavigationSample/EventEmitter.swift; sourceTree = "<group>"; };
 		E06422F81EE70EB8000A9940 /* EventEmitterBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventEmitterBridge.m; path = ReactNavigationSample/EventEmitterBridge.m; sourceTree = "<group>"; };
-		E06961BD1EDDA266000EA39F /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ReactNavigationSample/Constants.h; sourceTree = "<group>"; };
-		E06961BE1EDDA266000EA39F /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = ReactNavigationSample/Constants.m; sourceTree = "<group>"; };
 		F6D0875E08137392ED1EA8C2 /* Pods-ReactNavigationSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNavigationSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactNavigationSample/Pods-ReactNavigationSample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -422,10 +416,6 @@
 				E06422CA1EE6AA1A000A9940 /* Constants.swift */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
-				E01282901EDD91F600CE1F75 /* Events.h */,
-				E01282911EDD91F600CE1F75 /* Events.m */,
-				E06961BD1EDDA266000EA39F /* Constants.h */,
-				E06961BE1EDDA266000EA39F /* Constants.m */,
 				E02949191EBB43FC0066411F /* Alert.h */,
 				E029491A1EBB43FC0066411F /* Alert.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -1023,7 +1013,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E06422F51EE70D8F000A9940 /* EventEmitterHelper.swift in Sources */,
-				E01282931EDD91F600CE1F75 /* Events.m in Sources */,
 				E029491B1EBB43FC0066411F /* Alert.m in Sources */,
 				E06422F71EE70DF4000A9940 /* EventEmitter.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
@@ -1031,7 +1020,6 @@
 				E06422D91EE6ADE7000A9940 /* AppAuthViewControllerBridge.m in Sources */,
 				E06422F91EE70EB8000A9940 /* EventEmitterBridge.m in Sources */,
 				E06422CB1EE6AA1A000A9940 /* AppAuthViewController.swift in Sources */,
-				E06961BF1EDDA266000EA39F /* Constants.m in Sources */,
 				E06422CC1EE6AA1A000A9940 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

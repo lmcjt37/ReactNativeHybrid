@@ -24,13 +24,12 @@ class EventEmitterHelper {
   }
   
   func dispatch(name: String, body: Any?) {
-    eventEmitter.sendEvent(withName: name, body: body)
+    EventEmitterHelper.eventEmitter.sendEvent(withName: name, body: body)
   }
   
   /// All Events which must be support by React Native.
   lazy var allEvents: [String] = {
-    var allEventNames: [String] = ["LogEvent", "LogSuccess"]
-    return allEventNames
+    return ["LogEvent", "LogSuccess"]
   }()
 
 }

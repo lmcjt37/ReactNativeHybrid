@@ -6,12 +6,9 @@
 //  Copyright © 2017 Facebook. All rights reserved.
 //
 
-// Internal classes/subclasses
+
 #import "AppDelegate.h"
-
-// 3rd Party Modules
 #import <AppAuth/AppAuth.h>
-
-// REACT
 #import "RCTRootView.h"
 #import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>

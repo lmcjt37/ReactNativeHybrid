@@ -25,7 +25,7 @@
 
 #import "AppDelegate.h"
 #import "AppAuth.h"
-#import "AppAuthViewController.h"
+#import "ReactNavigationSample-Swift.h"
 
 @implementation AppDelegate
 

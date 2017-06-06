@@ -9,8 +9,7 @@
 import UIKit
 import AppAuth
 
-@objc(AppAuthViewController)
-class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAuthStateErrorDelegate {
+@objc class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAuthStateErrorDelegate {
 
   var authState:OIDAuthState?
   
