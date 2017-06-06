@@ -50,8 +50,8 @@ class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAu
   @objc(isAuthorised:)
   func isAuthorised(callback: RCTResponseSenderBlock) -> Void {
     print("IS AUTHORISED CALLED")
-    if self.authState != nil {
-      let isAuthorised = self.authState?.isAuthorized
+    if authState != nil {
+      let isAuthorised = authState?.isAuthorized
       callback([isAuthorised!]);
     } else {
       callback([false])
@@ -83,7 +83,7 @@ class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAu
   // saves OIDAuthState to NSUSerDefaults
   func saveState(){
     // for production usage consider using the OS Keychain instead
-    if self.authState != nil {
+    if authState != nil {
       let archivedAuthState = NSKeyedArchiver.archivedData(withRootObject: authState!)
       UserDefaults.standard.set(archivedAuthState, forKey: constants.kAppAuthAuthStateKey)
     } else {
@@ -118,8 +118,8 @@ class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAu
   
   // when the authorization state changes, storage is updated.
   func didChange(_ state: OIDAuthState) {
-    self.authState = state
-    self.authState?.stateChangeDelegate = self
+    authState = state
+    authState?.stateChangeDelegate = self
     self.stateChanged()
   }
   
