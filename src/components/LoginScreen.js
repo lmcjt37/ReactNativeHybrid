@@ -42,11 +42,11 @@ class LoginScreen extends Component {
                     // this.setState({
                     //     user: response.success
                     // });
+                    this.LogSuccess.remove();
                     navigation.dispatch({ type: 'Login' });
                 } else {
                     Alert.getAlert("There was a problem logging in.");
                 }
-                this.LogSuccess.remove();
             }
         );
 
@@ -61,7 +61,7 @@ class LoginScreen extends Component {
                             if (error) {
                                 Alert.getAlert(error);
                             }
-                            if (response) {
+                            if (response.success) {
                                 this.LogSuccess.remove();
                                 navigation.dispatch({ type: 'Login' });
                             } else {
