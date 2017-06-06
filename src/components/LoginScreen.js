@@ -39,9 +39,6 @@ class LoginScreen extends Component {
             'LogSuccess',
             (response) => {
                 if (response.success) {
-                    // this.setState({
-                    //     user: response.success
-                    // });
                     this.LogSuccess.remove();
                     navigation.dispatch({ type: 'Login' });
                 } else {
@@ -57,10 +54,7 @@ class LoginScreen extends Component {
                 </Text>
                 <Button
                     onPress={() => {
-                        AppAuthViewController.isAuthorised((error, response) => {
-                            if (error) {
-                                Alert.getAlert(error);
-                            }
+                        AppAuthViewController.isAuthorised((response) => {
                             if (response.success) {
                                 this.LogSuccess.remove();
                                 navigation.dispatch({ type: 'Login' });

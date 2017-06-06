@@ -12,7 +12,7 @@ import AppAuth
 @objc(AppAuthViewController)
 class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAuthStateErrorDelegate {
 
-  var authState:OIDAuthState? = nil
+  var authState:OIDAuthState?
   
   var constants = Constants()
   
@@ -30,15 +30,38 @@ class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAu
     self.view.addSubview(rootView!)
     
     self.loadState()
+    
   }
   
-  // React Native methods exposed through obj-c bridge
-  @objc func isAuthorised(_ callback: RCTResponseSenderBlock) {
-    callback([NSNull(), (authState?.isAuthorized)! as Bool]);
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
   }
   
-  @objc func authorised(_ callback: RCTResponseSenderBlock) {
+  /**
+  * React Native methods
+  * See for information: AppAuthViewControllerBridge.m
+  */
+  @objc(authorise:)
+  func authorise(callback: RCTResponseSenderBlock) -> Void {
+    print("AUTHORISED CALLED")
     self.authWithAutoCodeExchange()
+  }
+  
+  @objc(isAuthorised:)
+  func isAuthorised(callback: RCTResponseSenderBlock) -> Void {
+    print("IS AUTHORISED CALLED")
+    if self.authState != nil {
+      let isAuthorised = self.authState?.isAuthorized
+      callback([isAuthorised!]);
+    } else {
+      callback([false])
+    }
+  }
+  
+  @objc(logout:)
+  func logout(callback: RCTResponseSenderBlock) -> Void {
+    print("LOGOUT CALLED")
+    self.clearState()
   }
   
   func verifyConfig() {
@@ -60,11 +83,10 @@ class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAu
   // saves OIDAuthState to NSUSerDefaults
   func saveState(){
     // for production usage consider using the OS Keychain instead
-    if authState != nil{
+    if self.authState != nil {
       let archivedAuthState = NSKeyedArchiver.archivedData(withRootObject: authState!)
       UserDefaults.standard.set(archivedAuthState, forKey: constants.kAppAuthAuthStateKey)
-    }
-    else{
+    } else {
       UserDefaults.standard.set(nil, forKey: constants.kAppAuthAuthStateKey)
     }
     UserDefaults.standard.synchronize()
@@ -78,10 +100,13 @@ class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAu
     guard let authState = NSKeyedUnarchiver.unarchiveObject(with: archivedAuthState as Data) as? OIDAuthState else{
       return
     }
-    setAuthState(authState: authState)
+    self.setAuthState(authState: authState)
   }
   
   func setAuthState(authState:OIDAuthState?){
+    if (self.authState == authState) {
+      return
+    }
     self.authState = authState
     self.authState?.stateChangeDelegate = self
     self.stateChanged()
@@ -92,9 +117,9 @@ class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAu
   }
   
   // when the authorization state changes, storage is updated.
-  public func didChange(_ state: OIDAuthState) {
-    authState = state
-    authState?.stateChangeDelegate = self
+  func didChange(_ state: OIDAuthState) {
+    self.authState = state
+    self.authState?.stateChangeDelegate = self
     self.stateChanged()
   }
   
@@ -117,7 +142,7 @@ class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAu
       
       if configuration == nil {
         self.logMessage(message: "Error retrieving discovery document: \(error?.localizedDescription)")
-        self.setAuthState(authState: nil)
+        self.clearState()
         return
       }
       
@@ -130,8 +155,7 @@ class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAu
       let appDelegate = UIApplication.shared.delegate as! AppDelegate
       self.logMessage(message: "Initiating authorization request with scope: \(request.scope!)")
       
-      // self -> delegate > root controller - might need changing
-      appDelegate.currentAuthorizationFlow = OIDAuthState.authState(byPresenting: request, presenting: self){
+      appDelegate.currentAuthorizationFlow = OIDAuthState.authState(byPresenting: request, presenting: (appDelegate.window?.rootViewController)!){
         authState,error in
         if authState != nil{
           self.setAuthState(authState: authState)
@@ -140,14 +164,10 @@ class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAu
         }
         else{
           self.logMessage(message: "Authorization error: \(error!.localizedDescription)")
-          self.setAuthState(authState: nil)
+          self.clearState()
         }
       }
     }
-  }
-  
-  func logout() {
-    self.setAuthState(authState: nil)
   }
   
   // Performs a Userinfo API call using @c OIDAuthState.withFreshTokensPerformAction.
@@ -220,9 +240,13 @@ class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAu
     }
   }
   
+  func clearState() {
+    self.setAuthState(authState: nil)
+    self.logMessage(message: "Auth state has been cleared")
+  }
+  
   func logMessage(message:String){
     // outputs to stdout
     print(message)
-    
   }
 }

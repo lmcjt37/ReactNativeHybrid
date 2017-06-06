@@ -6,14 +6,19 @@
 //  Copyright © 2017 Facebook. All rights reserved.
 //
 
-#import <React/RCTBridgeModule.h>
 #import <UIKit/UIKit.h>
 #import <AppAuth/AppAuth.h>
+#import <React/RCTBridgeModule.h>
 
 @interface RCT_EXTERN_MODULE(AppAuthViewController, UIViewController)
 
-RCT_EXTERN_METHOD(authorise:(id nullable) callback(RCTResponseSenderBlock *)callback)
+// handles issuer token and user info calling event emitter to pass data to react native
+RCT_EXTERN_METHOD(authorise:(RCTResponseSenderBlock *)callback)
 
-RCT_EXTERN_METHOD(isAuthorised:(id nullable) callback(RCTResponseSenderBlock *)callback)
+// returns boolean
+RCT_EXTERN_METHOD(isAuthorised:(RCTResponseSenderBlock *)callback)
+
+// clears authState (TODO:: emit event to trigger logout/ use callback)
+RCT_EXTERN_METHOD(logout:(RCTResponseSenderBlock *)callback)
 
 @end
