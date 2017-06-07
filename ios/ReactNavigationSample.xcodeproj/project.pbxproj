@@ -22,6 +22,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		261E35CA318A5E8CC0AF606A /* Pods_ReactNavigationSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50722158D6C4F6F7895E7379 /* Pods_ReactNavigationSample.framework */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -36,11 +37,11 @@
 		2DCD954D1E0B4F2C00145EB5 /* ReactNavigationSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ReactNavigationSampleTests.m */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		913942B30A32BAA6BFE54D91 /* libPods-ReactNavigationSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0C83DEA421B6E7A4237FF2 /* libPods-ReactNavigationSample.a */; };
-		E01282921EDD91F600CE1F75 /* AppAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E012828F1EDD91F600CE1F75 /* AppAuthViewController.m */; };
-		E01282931EDD91F600CE1F75 /* Events.m in Sources */ = {isa = PBXBuildFile; fileRef = E01282911EDD91F600CE1F75 /* Events.m */; };
-		E029491B1EBB43FC0066411F /* Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = E029491A1EBB43FC0066411F /* Alert.m */; };
-		E06961BF1EDDA266000EA39F /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = E06961BE1EDDA266000EA39F /* Constants.m */; };
+		E06422CB1EE6AA1A000A9940 /* AppAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06422C91EE6AA1A000A9940 /* AppAuthViewController.swift */; };
+		E06422CC1EE6AA1A000A9940 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06422CA1EE6AA1A000A9940 /* Constants.swift */; };
+		E06422D91EE6ADE7000A9940 /* AppAuthViewControllerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E06422D81EE6ADE7000A9940 /* AppAuthViewControllerBridge.m */; };
+		E06422F71EE70DF4000A9940 /* EventEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06422F61EE70DF4000A9940 /* EventEmitter.swift */; };
+		E06422F91EE70EB8000A9940 /* EventEmitterBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E06422F81EE70EB8000A9940 /* EventEmitterBridge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -258,19 +259,17 @@
 		1C6EB7C409D359F54136D8E0 /* Pods-ReactNavigationSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNavigationSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactNavigationSample/Pods-ReactNavigationSample.debug.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* ReactNavigationSample-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReactNavigationSample-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* ReactNavigationSample-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ReactNavigationSample-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		50722158D6C4F6F7895E7379 /* Pods_ReactNavigationSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactNavigationSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
-		5F0C83DEA421B6E7A4237FF2 /* libPods-ReactNavigationSample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactNavigationSample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		E00FCC0A1ECDCBE60051BF26 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
-		E012828E1EDD91F600CE1F75 /* AppAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppAuthViewController.h; path = ReactNavigationSample/AppAuthViewController.h; sourceTree = "<group>"; };
-		E012828F1EDD91F600CE1F75 /* AppAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppAuthViewController.m; path = ReactNavigationSample/AppAuthViewController.m; sourceTree = "<group>"; };
-		E01282901EDD91F600CE1F75 /* Events.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Events.h; path = ReactNavigationSample/Events.h; sourceTree = "<group>"; };
-		E01282911EDD91F600CE1F75 /* Events.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Events.m; path = ReactNavigationSample/Events.m; sourceTree = "<group>"; };
-		E02949191EBB43FC0066411F /* Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Alert.h; path = ReactNavigationSample/Alert.h; sourceTree = "<group>"; };
-		E029491A1EBB43FC0066411F /* Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Alert.m; path = ReactNavigationSample/Alert.m; sourceTree = "<group>"; };
-		E06961BD1EDDA266000EA39F /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ReactNavigationSample/Constants.h; sourceTree = "<group>"; };
-		E06961BE1EDDA266000EA39F /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = ReactNavigationSample/Constants.m; sourceTree = "<group>"; };
+		E06422AF1EE6AA1A000A9940 /* ReactNavigationSample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ReactNavigationSample-Bridging-Header.h"; sourceTree = "<group>"; };
+		E06422C91EE6AA1A000A9940 /* AppAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppAuthViewController.swift; path = ReactNavigationSample/AppAuthViewController.swift; sourceTree = "<group>"; };
+		E06422CA1EE6AA1A000A9940 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = ReactNavigationSample/Constants.swift; sourceTree = "<group>"; };
+		E06422D81EE6ADE7000A9940 /* AppAuthViewControllerBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppAuthViewControllerBridge.m; path = ReactNavigationSample/AppAuthViewControllerBridge.m; sourceTree = "<group>"; };
+		E06422F61EE70DF4000A9940 /* EventEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventEmitter.swift; path = ReactNavigationSample/EventEmitter.swift; sourceTree = "<group>"; };
+		E06422F81EE70EB8000A9940 /* EventEmitterBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventEmitterBridge.m; path = ReactNavigationSample/EventEmitterBridge.m; sourceTree = "<group>"; };
 		F6D0875E08137392ED1EA8C2 /* Pods-ReactNavigationSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNavigationSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactNavigationSample/Pods-ReactNavigationSample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -298,7 +297,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				913942B30A32BAA6BFE54D91 /* libPods-ReactNavigationSample.a in Frameworks */,
+				261E35CA318A5E8CC0AF606A /* Pods_ReactNavigationSample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,21 +406,19 @@
 		13B07FAE1A68108700A75B9A /* ReactNavigationSample */ = {
 			isa = PBXGroup;
 			children = (
+				E06422C91EE6AA1A000A9940 /* AppAuthViewController.swift */,
+				E06422D81EE6ADE7000A9940 /* AppAuthViewControllerBridge.m */,
+				E06422CA1EE6AA1A000A9940 /* Constants.swift */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
-				E012828E1EDD91F600CE1F75 /* AppAuthViewController.h */,
-				E012828F1EDD91F600CE1F75 /* AppAuthViewController.m */,
-				E01282901EDD91F600CE1F75 /* Events.h */,
-				E01282911EDD91F600CE1F75 /* Events.m */,
-				E06961BD1EDDA266000EA39F /* Constants.h */,
-				E06961BE1EDDA266000EA39F /* Constants.m */,
-				E02949191EBB43FC0066411F /* Alert.h */,
-				E029491A1EBB43FC0066411F /* Alert.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				E06422AF1EE6AA1A000A9940 /* ReactNavigationSample-Bridging-Header.h */,
+				E06422F61EE70DF4000A9940 /* EventEmitter.swift */,
+				E06422F81EE70EB8000A9940 /* EventEmitterBridge.m */,
 			);
 			name = ReactNavigationSample;
 			sourceTree = "<group>";
@@ -499,7 +496,7 @@
 			isa = PBXGroup;
 			children = (
 				E00FCC0A1ECDCBE60051BF26 /* SafariServices.framework */,
-				5F0C83DEA421B6E7A4237FF2 /* libPods-ReactNavigationSample.a */,
+				50722158D6C4F6F7895E7379 /* Pods_ReactNavigationSample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -621,6 +618,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						LastSwiftMigration = 0820;
 						SystemCapabilities = {
 							com.apple.SafariKeychain = {
 								enabled = 1;
@@ -1006,12 +1004,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E01282931EDD91F600CE1F75 /* Events.m in Sources */,
-				E029491B1EBB43FC0066411F /* Alert.m in Sources */,
+				E06422F71EE70DF4000A9940 /* EventEmitter.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				E01282921EDD91F600CE1F75 /* AppAuthViewController.m in Sources */,
-				E06961BF1EDDA266000EA39F /* Constants.m in Sources */,
+				E06422D91EE6ADE7000A9940 /* AppAuthViewControllerBridge.m in Sources */,
+				E06422F91EE70EB8000A9940 /* EventEmitterBridge.m in Sources */,
+				E06422CB1EE6AA1A000A9940 /* AppAuthViewController.swift in Sources */,
+				E06422CC1EE6AA1A000A9940 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1063,6 +1062,7 @@
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1084,6 +1084,7 @@
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = ReactNavigationSampleTests/Info.plist;
@@ -1104,6 +1105,7 @@
 			baseConfigurationReference = 1C6EB7C409D359F54136D8E0 /* Pods-ReactNavigationSample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ReactNavigationSample/ReactNavigationSample.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
@@ -1118,6 +1120,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firstutility.ReactNavigationSample;
 				PRODUCT_NAME = ReactNavigationSample;
+				SWIFT_OBJC_BRIDGING_HEADER = "ReactNavigationSample-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1127,6 +1132,7 @@
 			baseConfigurationReference = F6D0875E08137392ED1EA8C2 /* Pods-ReactNavigationSample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ReactNavigationSample/ReactNavigationSample.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
@@ -1140,6 +1146,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firstutility.ReactNavigationSample;
 				PRODUCT_NAME = ReactNavigationSample;
+				SWIFT_OBJC_BRIDGING_HEADER = "ReactNavigationSample-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

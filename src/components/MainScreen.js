@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes, Component } from 'react';
 import { View } from 'react-native';
 
 import LoginStatusMessage from './LoginStatusMessage';
@@ -6,15 +6,27 @@ import AuthButton from './AuthButton';
 
 import Styles from '../themes/Styles';
 
-const MainScreen = () => (
-    <View style={ Styles.container }>
-        <LoginStatusMessage />
-        <AuthButton />
-    </View>
-);
+class MainScreen extends Component {
+    constructor(props) {
+        super(props);
+    }
 
-MainScreen.navigationOptions = {
-  title: 'Home Screen',
+    static navigationOptions = {
+        title: 'Home Screen',
+    };
+
+    render() {
+        return (
+            <View style={ Styles.container }>
+                <LoginStatusMessage />
+                <AuthButton />
+            </View>
+        );
+    }
+}
+
+MainScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
 };
 
 export default MainScreen;

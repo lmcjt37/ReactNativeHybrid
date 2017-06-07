@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import {
+  Alert,
   Button,
   Text,
   View,
@@ -8,12 +9,14 @@ import {
 } from 'react-native';
 
 import Styles from '../themes/Styles';
-const { AppAuthViewController, Alert, Events } = NativeModules;
+const { AppAuthViewController, EventEmitter } = NativeModules;
+const EventManager = new NativeEventEmitter(EventEmitter);
 
 class LoginScreen extends Component {
     constructor(props) {
         super(props);
         this.LogEvent;
+        this.LogSuccess;
     }
 
     static navigationOptions = {
@@ -21,10 +24,9 @@ class LoginScreen extends Component {
     };
 
     componentWillMount() {
-        const EventsManagerEmitter = new NativeEventEmitter(Events);
-        this.LogEvent = EventsManagerEmitter.addListener(
+        this.LogEvent = EventManager.addListener(
             'LogEvent',
-            (event) => console.log("hello from JS ==> " + JSON.stringify(event))
+            (event) => console.log(JSON.stringify(event))
         );
     }
 
@@ -34,6 +36,25 @@ class LoginScreen extends Component {
 
     render() {
         const { navigation } = this.props;
+        this.LogSuccess = EventManager.addListener(
+            'LogSuccess',
+            (response) => {
+                if (response.success) {
+                    this.LogSuccess.remove();
+                    navigation.dispatch({ type: 'Login' });
+                } else {
+                    Alert.alert('Alert Title',
+                        'There was a problem logging in.',
+                        [
+                            {
+                                text: 'OK', onPress: () => console.log('OK Pressed')
+                            }
+                        ]
+                    );
+                }
+            }
+        );
+
         return (
             <View style={ Styles.container }>
                 <Text style={ Styles.title }>
@@ -41,26 +62,16 @@ class LoginScreen extends Component {
                 </Text>
                 <Button
                     onPress={() => {
-                        AppAuthViewController.authorise((response) => {
+                        AppAuthViewController.isAuthorised((response) => {
                             if (response) {
+                                this.LogSuccess.remove();
                                 navigation.dispatch({ type: 'Login' });
                             } else {
-                                Alert.getAlert("There was a problem logging in.");
+                                AppAuthViewController.authorise((response) => console.log(response));
                             }
                         });
                     }}
                     title="Log In"
-                    />
-                <Button
-                    onPress={() => {
-                        AppAuthViewController.isAuthorised((error, response) => {
-                            if (error) {
-                                Alert.getAlert(error);
-                            }
-                            Alert.getAlert("Is the app authorised? " + response);
-                        });
-                    }}
-                    title="Is Authorised?"
                     />
             </View>
         );

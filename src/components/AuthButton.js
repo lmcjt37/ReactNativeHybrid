@@ -1,14 +1,28 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-native';
+import {
+    Button,
+    NativeModules
+} from 'react-native';
 import { NavigationActions } from 'react-navigation';
 
-const AuthButton = ({ logout, login, isLoggedIn }) => (
-  <Button
-    title={ isLoggedIn ? 'Log Out' : 'Log In' }
-    onPress={ isLoggedIn ? logout : login }
-  />
-);
+const { AppAuthViewController } = NativeModules;
+
+class AuthButton extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        const { logout, login, isLoggedIn } = this.props;
+        return (
+            <Button
+              title={ isLoggedIn ? 'Log Out' : 'Log In' }
+              onPress={ isLoggedIn ? logout : login }
+            />
+        )
+    }
+}
 
 AuthButton.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
@@ -21,7 +35,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch({ type: 'Logout' }),
+  logout: () => {
+      AppAuthViewController.logout((response) => {
+          if (response) {
+              dispatch({ type: 'Logout' })
+          }
+      });
+  },
   login: () => dispatch(NavigationActions.navigate({ routeName: 'Login' })),
 });
 
