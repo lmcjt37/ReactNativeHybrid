@@ -43,6 +43,7 @@
   
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   
+//  UIViewController *mainViewController = [[AppAuthViewController alloc] init];
   UIViewController *mainViewController = [[AppAuthViewController alloc] init];
   
   self.window.rootViewController = mainViewController;

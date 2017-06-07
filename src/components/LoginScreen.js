@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 
 import Styles from '../themes/Styles';
-const { AppAuthViewController, Alert, Events } = NativeModules;
-const EventsManagerEmitter = new NativeEventEmitter(Events);
+const { AppAuthViewController, Alert, EventEmitter } = NativeModules;
+const EventManager = new NativeEventEmitter(EventEmitter);
 
 class LoginScreen extends Component {
     constructor(props) {
@@ -23,7 +23,7 @@ class LoginScreen extends Component {
     };
 
     componentWillMount() {
-        this.LogEvent = EventsManagerEmitter.addListener(
+        this.LogEvent = EventManager.addListener(
             'LogEvent',
             (event) => console.log(JSON.stringify(event))
         );
@@ -35,7 +35,7 @@ class LoginScreen extends Component {
 
     render() {
         const { navigation } = this.props;
-        this.LogSuccess = EventsManagerEmitter.addListener(
+        this.LogSuccess = EventManager.addListener(
             'LogSuccess',
             (response) => {
                 if (response.success) {
