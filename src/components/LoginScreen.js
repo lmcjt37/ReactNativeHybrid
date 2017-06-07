@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import {
+  Alert,
   Button,
   Text,
   View,
@@ -8,7 +9,7 @@ import {
 } from 'react-native';
 
 import Styles from '../themes/Styles';
-const { AppAuthViewController, Alert, EventEmitter } = NativeModules;
+const { AppAuthViewController, EventEmitter } = NativeModules;
 const EventManager = new NativeEventEmitter(EventEmitter);
 
 class LoginScreen extends Component {
@@ -42,7 +43,14 @@ class LoginScreen extends Component {
                     this.LogSuccess.remove();
                     navigation.dispatch({ type: 'Login' });
                 } else {
-                    Alert.getAlert("There was a problem logging in.");
+                    Alert.alert('Alert Title',
+                        'There was a problem logging in.',
+                        [
+                            {
+                                text: 'OK', onPress: () => console.log('OK Pressed')
+                            }
+                        ]
+                    );
                 }
             }
         );
@@ -55,7 +63,7 @@ class LoginScreen extends Component {
                 <Button
                     onPress={() => {
                         AppAuthViewController.isAuthorised((response) => {
-                            if (response.success) {
+                            if (response) {
                                 this.LogSuccess.remove();
                                 navigation.dispatch({ type: 'Login' });
                             } else {

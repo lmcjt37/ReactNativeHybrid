@@ -9,15 +9,30 @@
 import Foundation
 
 @objc(EventEmitter)
-open class EventEmitter: RCTEventEmitter {
+class EventEmitter: RCTEventEmitter {
   
-  override init() {
-    super.init()
-    EventEmitterHelper.sharedInstance.registerEventEmitter(eventEmitter: self)
+  override func supportedEvents() -> [String] {
+    return ["LogEvent", "LogSuccess"]
   }
   
-  @objc open override func supportedEvents() -> [String] {
-    return EventEmitterHelper.sharedInstance.allEvents
+  override func startObserving() {
+    for event in self.supportedEvents() {
+      NotificationCenter.default.addObserver(self, selector: #selector(logInternalEvent(notification:)), name:NSNotification.Name(rawValue: event), object: nil)
+    }
+  }
+
+  override func stopObserving() {
+    NotificationCenter.default.removeObserver(self)
+  }
+
+
+  func logInternalEvent(notification: NSNotification) {
+    self.sendEvent(withName: notification.name.rawValue, body: notification.userInfo)
+  }
+
+  
+  @objc func dispatch(name: String, body: Any?) {
+    NotificationCenter.default.post(name: NSNotification.Name(rawValue: name), object: self, userInfo: body as! [AnyHashable : Any]?)
   }
   
 }

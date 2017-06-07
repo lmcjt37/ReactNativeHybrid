@@ -6,7 +6,6 @@
 //  Copyright © 2017 Facebook. All rights reserved.
 //
 
-
 #import "AppDelegate.h"
 #import <AppAuth/AppAuth.h>
 #import "RCTRootView.h"

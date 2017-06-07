@@ -6,7 +6,6 @@
 //  Copyright © 2017 Facebook. All rights reserved.
 //
 
-import UIKit
 import AppAuth
 
 @objc(AppAuthViewController)
@@ -15,6 +14,8 @@ class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAu
   var authState:OIDAuthState?
   
   var constants = Constants()
+  
+  var eventEmitter = EventEmitter.init()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -43,25 +44,24 @@ class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAu
   */
   @objc(authorise:)
   func authorise(callback: RCTResponseSenderBlock) -> Void {
-    print("AUTHORISED CALLED")
     self.authWithAutoCodeExchange()
   }
   
   @objc(isAuthorised:)
   func isAuthorised(callback: RCTResponseSenderBlock) -> Void {
-    print("IS AUTHORISED CALLED")
-    if authState != nil {
-      let isAuthorised = authState?.isAuthorized
+    self.loadState()
+    let isAuthorised = authState?.isAuthorized
+    if isAuthorised != nil {
       callback([isAuthorised!]);
     } else {
-      callback([false])
+      callback([false]);
     }
   }
   
   @objc(logout:)
   func logout(callback: RCTResponseSenderBlock) -> Void {
-    print("LOGOUT CALLED")
     self.clearState()
+    callback([true])
   }
   
   func verifyConfig() {
@@ -94,20 +94,17 @@ class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAu
   
   // loads OIDAuthState from NSUSerDefaults
   func loadState(){
-    guard let archivedAuthState = UserDefaults.standard.object(forKey: constants.kAppAuthAuthStateKey) as? NSData else{
+    guard let archivedAuthState = UserDefaults.standard.object(forKey: constants.kAppAuthAuthStateKey) as? NSData else {
       return
     }
-    guard let authState = NSKeyedUnarchiver.unarchiveObject(with: archivedAuthState as Data) as? OIDAuthState else{
+    guard let newState = NSKeyedUnarchiver.unarchiveObject(with: archivedAuthState as Data) as? OIDAuthState else {
       return
     }
-    self.setAuthState(authState: authState)
+    setAuthState(state: newState)
   }
   
-  func setAuthState(authState:OIDAuthState?){
-    if (self.authState == authState) {
-      return
-    }
-    self.authState = authState
+  func setAuthState(state:OIDAuthState?){
+    self.authState = state
     self.authState?.stateChangeDelegate = self
     self.stateChanged()
   }
@@ -157,14 +154,15 @@ class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAu
       
       appDelegate.currentAuthorizationFlow = OIDAuthState.authState(byPresenting: request, presenting: (appDelegate.window?.rootViewController)!){
         authState,error in
-        if authState != nil{
-          self.setAuthState(authState: authState)
+        if authState != nil {
+          self.setAuthState(state: authState)
           self.logMessage(message: "Got authorization tokens. Access token: \(authState!.lastTokenResponse!.accessToken!)")
           self.userinfo()
-        }
-        else{
+          
+        } else {
           self.logMessage(message: "Authorization error: \(error!.localizedDescription)")
           self.clearState()
+          
         }
       }
     }
@@ -230,7 +228,7 @@ class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAu
               return
             }
 //            self.logMessage(message: "Success: \(jsonDictionaryOrArray)")
-            EventEmitterHelper.sharedInstance.dispatch(name: "LogSuccess", body: jsonDictionaryOrArray)
+            self.eventEmitter.dispatch(name: "LogSuccess", body: ["success": jsonDictionaryOrArray])
           }
           catch{
             self.logMessage(message: "Error while serializing data to JSON")
@@ -242,14 +240,13 @@ class AppAuthViewController: UIViewController, OIDAuthStateChangeDelegate, OIDAu
   }
   
   func clearState() {
-    self.setAuthState(authState: nil)
+    self.setAuthState(state: nil)
     self.logMessage(message: "Auth state has been cleared")
   }
   
   func logMessage(message:String){
     // outputs to stdout
-    print(message)
-    
-    EventEmitterHelper.sharedInstance.dispatch(name: "LogEvent", body: message)
+//    print(message)
+    eventEmitter.dispatch(name: "LogEvent", body: ["event": message])
   }
 }
